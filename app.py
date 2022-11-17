@@ -17,7 +17,7 @@ sites_pool = pooling.MySQLConnectionPool(
     host="localhost",
     user="root",
     password="1234",
-    database="Taipei_Attractions"
+    database="taipei_attractions"
 )
 
 
