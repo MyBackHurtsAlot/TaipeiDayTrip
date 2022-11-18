@@ -65,11 +65,11 @@ def attractions_list():
         k_len = (len(keyword_result))
         print(k_len)
 
-    for i in keyword_result:
-        imgs = i["images"].split(" ")
-        # Put it back
-        i["images"] = imgs
-    # print(keyword_result)
+        for i in keyword_result:
+            imgs = i["images"].split(" ")
+            # Put it back
+            i["images"] = imgs
+        # print(keyword_result)
 
     # Set last page
     last_page = 12
