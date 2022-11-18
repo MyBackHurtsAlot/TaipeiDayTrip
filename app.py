@@ -43,16 +43,18 @@ def attractions_list():
     keyword = request.args.get("keyword", "")
 
     # page result
-    p_sql = "select * from attractions limit %s, %s"
-    p_val = (page * 12, 12,)
-    cursor.execute(p_sql, p_val)  # from 0 * 12 to 12
-    page_result = cursor.fetchall()
+    if keyword == "":
+        p_sql = "select * from attractions limit %s, %s"
+        p_val = (page * 12, 12,)
+        cursor.execute(p_sql, p_val)  # from 0 * 12 to 12
+        page_result = cursor.fetchall()
+        p_len = (len(page_result))
 
     # Turn str into list
-    for i in page_result:
-        imgs = i["images"].split(" ")
-        # Put it back
-        i["images"] = imgs
+        for i in page_result:
+            imgs = i["images"].split(" ")
+            # Put it back
+            i["images"] = imgs
     # print(type(page_result))
 
     # Keyword result
@@ -60,6 +62,8 @@ def attractions_list():
     k_val = (keyword, "%" + keyword + "%", page * 12, 12,)
     cursor.execute(k_sql, k_val)
     keyword_result = cursor.fetchall()
+    k_len = (len(keyword_result))
+    print(k_len)
 
     for i in keyword_result:
         imgs = i["images"].split(" ")
@@ -67,18 +71,14 @@ def attractions_list():
         i["images"] = imgs
     # print(keyword_result)
 
-    # Find last page # CAN'T BE USED IN KEY_RESULT!!!!!!!!
-    cursor.execute("select id from attractions")
-    last_page = cursor.fetchall()
-    last_page = int(len(last_page)) / 12
-    last_page = math.ceil(last_page)
-    print(last_page)
+    # Set last page
+    last_page = 12
 
     try:
 
         # Query search result
         # Search page only
-        if keyword == "" and page < last_page - 1:
+        if keyword == "" and p_len == last_page:
             att_list = {
                 "nextPage": page + 1,
                 "data": page_result
@@ -92,13 +92,10 @@ def attractions_list():
             status = 200
         else:
             cursor.execute(
-                "select id from attractions where category = %s or name like %s", (keyword, "%" + keyword + "%",))
+                "select count(*) from attractions where category = %s or name like %s", (keyword, "%" + keyword + "%",))
             keyword_last_page = cursor.fetchall()
-            keyword_last_page = int(len(keyword_last_page))/12
-            keyword_last_page = math.ceil(keyword_last_page)
-            print(keyword_last_page)
 
-            if page < keyword_last_page - 1:
+            if k_len == last_page:
 
                 att_list = {
                     "nextPage": page + 1,
