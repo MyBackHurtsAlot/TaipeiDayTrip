@@ -56,14 +56,14 @@ def attractions_list():
             # Put it back
             i["images"] = imgs
     # print(type(page_result))
-
-    # Keyword result
-    k_sql = "select * from attractions where category = %s or name like %s limit %s, %s"
-    k_val = (keyword, "%" + keyword + "%", page * 12, 12,)
-    cursor.execute(k_sql, k_val)
-    keyword_result = cursor.fetchall()
-    k_len = (len(keyword_result))
-    print(k_len)
+    else:
+        # Keyword result
+        k_sql = "select * from attractions where category = %s or name like %s limit %s, %s"
+        k_val = (keyword, "%" + keyword + "%", page * 12, 12,)
+        cursor.execute(k_sql, k_val)
+        keyword_result = cursor.fetchall()
+        k_len = (len(keyword_result))
+        print(k_len)
 
     for i in keyword_result:
         imgs = i["images"].split(" ")
