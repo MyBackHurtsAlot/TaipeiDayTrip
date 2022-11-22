@@ -114,4 +114,5 @@ def attractions_list():
 
     response = make_response(
         att_list, status, {"Content-Type": "application/json"})
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response

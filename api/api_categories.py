@@ -57,4 +57,5 @@ def cat():
 
     response = make_response(
         all_cats, status, {"Content-Type": "application/json"})
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
