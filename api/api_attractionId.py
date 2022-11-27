@@ -66,4 +66,5 @@ def attraction_Id(attractionId):
 
     response = make_response(
         id_list, status, {"Content-Type": "application/json"})
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
