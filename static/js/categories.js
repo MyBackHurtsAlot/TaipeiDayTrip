@@ -39,9 +39,5 @@ categories = () => {
     function stopFunc(e) {
         e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
     }
-
-
-
-
 }
 categories()

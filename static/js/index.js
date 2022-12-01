@@ -1,14 +1,15 @@
 let page = 0
 let isLoading = false
+let url = window.location.origin
 
 
 let keywordInput = document.querySelector(".bannerSearchBar")
 let search = document.querySelector(".searchIconBackground")
 let indexAttractions = document.querySelector(".indexAttractions")
 
-// let main = document.querySelector(".main")
-// let indexAttractions = document.querySelector(".indexAttractions")
+// Set footer as target
 let target = document.querySelector(".footerContainer")
+
 
 
 
@@ -26,7 +27,21 @@ currentPage = async () => {
                 return response.json()
             }).then((data) => {
                 let indexData = data.data
-                // console.log(indexData.length)
+                // console.log(indexData.ID)
+
+
+
+                // Get ids
+                let idArr = []
+                let getIds = () => {
+                    for (let i = 0; i < indexData.length; i++) {
+                        let firstId = indexData[i].ID
+                        console.log(firstId)
+                        idArr.push(firstId)
+
+                    }
+                    return idArr
+                }
 
                 // Get imgs
                 let imgArr = []
@@ -47,8 +62,9 @@ currentPage = async () => {
                 let getName = () => {
                     for (let i = 0; i < indexData.length; i++) {
                         let firstName = indexData[i].name
+                        // console.log(firstName)
                         nameArr.push(firstName)
-                        // console.log(imgArr)
+
                     }
                     return nameArr
                 }
@@ -73,7 +89,7 @@ currentPage = async () => {
                     }
                     return mrtArr
                 }
-
+                let id = getIds()
                 let imgs = getImgs()
                 let names = getName()
                 let cat = getCat()
@@ -85,11 +101,13 @@ currentPage = async () => {
 
 
                 for (let i = 0; i < indexData.length; i++) {
-                    let imgsWrap = document.createElement("div")
+                    let imgsWrap = document.createElement("a")
                     imgsWrap.className = "imgsWrap"
+                    imgsWrap.setAttribute("href", `/attraction/${id[i]}`)
                     let mainImgs = document.createElement("img")
                     mainImgs.className = "mainImgs"
                     mainImgs.setAttribute("src", imgs[i])
+
 
                     let namesWrap = document.createElement("div")
                     namesWrap.className = "namesWrap"
@@ -137,6 +155,10 @@ currentPage = async () => {
                 isLoading = false
                 // console.log(page)
                 // }
+
+                // Select Attractions
+                // let link = 
+
             })
     }
 
@@ -148,20 +170,21 @@ const callback = (entries, observer) => {
         // console.log(entry)
         if (entry.isIntersecting) {
             // console.log("test" + page)
-            if (page !== null) {
-                if (keywordInput.value === "") {
+            if (page !== null) {  // Stops at page ===null
+                if (keywordInput.value === "") { // Shows all attractions first
                     currentPage()
-                } else if (keywordInput.value !== "") {
+                    // keywordSearch()
+                } else if (keywordInput.value !== "") { // Shows search result
                     keywordSearch(keyword)
                     // console.log(keyword)
                 } else {
-                    observer.unobserve(target);
-                    page = 0
+                    observer.unobserve(target); // unobserve search result
+                    page = 0 // reset search result page to 0 to avoid from blocked by page !== null
                 }
             }
             else {
-                observer.unobserve(target);
-                page = 0
+                observer.unobserve(target); // unobserve all attrations
+                page = 0 // reset search result page to 0 to avoid from blocked by page !== null
             }
         }
     })
@@ -170,3 +193,5 @@ const callback = (entries, observer) => {
 let observer = new IntersectionObserver(callback, options)
 observer.observe(target)
 
+
+// export default { currentPage, callback, observer, }

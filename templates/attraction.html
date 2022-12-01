@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attractions</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/attractions.css">
+</head>
+
+<body>
+    <!-- header -->
+    <nav class="navBar">
+        <div class="navBarContainer">
+            <div class="navBarTpe">
+                <p class="navBarTpeText">台北一日遊</p>
+            </div>
+            <div class="navBarBtn">
+                <div class=".navBarBtnItinerary">預定行程</div>
+                <div class="navBarBtnLogin">登入/註冊</div>
+            </div>
+        </div>
+    </nav>
+    <main class="main">
+        <div class="attractionTopWrap">
+            <div class="topLeft">
+                <img src="../static/imgs/AttractionPage/btn_leftArrow.png" alt="" class="sliderArrowLeft sliderArrow">
+                <img src="../static/imgs/AttractionPage/btn_rightArrow.png" alt="" class="sliderArrowRight sliderArrow">
+                <span class="dotControl"></span>
+            </div>
+            <div class="topRight">
+                <div class="rightText"></div>
+                <div class="rightWrap">
+                    <p>訂購導覽行程</p>
+                    <p class="subText">以此景點為中心的一日行程，帶您探索城市角落故事</p>
+                    <label for="dateTime" class="dateLabel">選擇日期：
+                        <input type="date" placeholder="yyyy/mm/dd" class="dateTime">
+                        <!-- <img src="../static/imgs/AttractionPage/icon_calendar.png" alt="" class="calendarIcon"> -->
+                    </label>
+                    <div class="halfDayWrap">
+                        <span>選擇時間：</span>
+                        <span class="morningWrap">
+                            <input type="radio" name="halfDay" class="morning">
+                            <label for="morning" class="chooseLable subText">上半天</label>
+                        </span>
+                        <span class="noonWrap">
+                            <input type="radio" name="halfDay" class="noon">
+                            <label for="noon" class="chooseLable subText">下半天</label>
+                        </span>
+                    </div>
+                    <div class="feeWrap">
+                        <span>導覽費用：</span>
+                        <span class="subText none">請選擇方案</span>
+                        <span class="subText morningFee">新台幣 2000 元</span>
+                        <span class="subText noonFee">新台幣 2500 元</span>
+                    </div>
+                    <div class=" reservation">
+                        開始預約行程
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="attractionBottomWrap">
+            <div class="descriptionWrap"></div>
+            <div class="addressWrap"></div>
+            <div class="transportWrap"></div>
+        </div>
+    </main>
+    <!-- footer -->
+    <footer>
+        <div class="footerContainer">
+            <p class="footerText">COPYRIGHT © 2022 台北一日遊</p>
+        </div>
+    </footer>
+    <script type="text/javascript" src="../static/js/attraction.js"></script>
+</body>
+
+</html>

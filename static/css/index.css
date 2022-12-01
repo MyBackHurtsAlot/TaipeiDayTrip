@@ -13,9 +13,7 @@ body {
     /* height: 100%; */
 }
 
-/* body {
-    outline: 3px solid blue;
-} */
+
 
 /* header */
 /* navBar */
@@ -28,6 +26,7 @@ body {
     display: flex;
     /* justify-content: center; */
     z-index: 100;
+    border: 1px solid #E8E8E8;
 
 }
 
@@ -140,6 +139,10 @@ body {
     height: 30px;
 }
 
+.searchIcon:hover {
+    transform: scale(1.02);
+}
+
 /* ======= bannerCat ======== */
 
 .bannerCat {
@@ -164,8 +167,8 @@ body {
 }
 
 .bannerContnet:hover {
-
     background-color: #E8E8E8;
+    transform: scale(1.01);
 }
 
 /* ======= main ======= */
@@ -188,6 +191,12 @@ main {
     border-radius: 5px;
     outline: 1px solid #E8E8E8;
     position: relative;
+    text-decoration: none;
+}
+
+.imgsWrap:hover {
+    cursor: pointer;
+    transform: scale(1.01);
 }
 
 .mainImgs {
@@ -244,35 +253,19 @@ main {
 footer {
     width: 100%;
     display: flex;
-
-    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
-    /* padding: 40px 843px; */
     height: 104px;
-    /* left: 0px; */
-    /* position: sticky;
-    bottom: 0; */
-    /* margin-top: 200px; */
     background: #757575;
 }
 
 
 .footerText {
-    /* position: absolute; */
     width: 234px;
     height: 14px;
-    /* left: 0px;
-    top: 5px; */
-
-    /* Body - Bold 16(13.3) */
-
     font-style: normal;
     font-weight: 700;
     line-height: 13px;
-    /* identical to box height, or 83% */
-
-
     color: #FFFFFF;
 }
 
@@ -281,15 +274,8 @@ footer {
 
 @media(max-width: 700px) {
     .bannerContainer {
-        /* width: min(90%, 320px); */
-        /* position: absolute;
-    top: 85px;
-    left: 370px; */
         display: grid;
         gap: 15px;
-        /* margin: auto; */
-        /* justify-content: center;
-        align-items: center; */
     }
 
     .magnifier {

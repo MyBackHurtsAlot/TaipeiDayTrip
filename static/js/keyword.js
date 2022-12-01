@@ -131,7 +131,7 @@ keywordSearch = async (keyword) => {
 
                     }
                     page = data.nextPage
-                    console.log(page)
+                    // console.log(page)
                     isLoading = false
                 }
             })
@@ -150,20 +150,3 @@ search.addEventListener("click", () => {
     }
     // console.log(keyword)
 })
-// const keywordCallback = (entries, keywordObserver) => {
-//     entries.forEach(entry => {
-//         // console.log(entry)
-//         if (entry.isIntersecting) {
-//             if (page !== null) {
-//                 currentPage()
-//             }
-//             else {
-//                 keywordObserver.unobserve(target);
-//             }
-//         }
-//     })
-// }
-
-
-// let observer = new IntersectionObserver(keywordCallback, options)
-// observer.observe(target)

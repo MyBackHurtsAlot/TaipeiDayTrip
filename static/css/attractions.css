@@ -1,0 +1,350 @@
+hr {
+    border: 0px;
+    height: 1px;
+    background: #e8e8e8;
+}
+
+/* ===== Top ===== */
+.attractionTopWrap {
+    height: 400px;
+    margin: 95px auto 40px auto;
+    font-weight: 700;
+    color: #666666;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+/* ===== Top Right===== */
+.topRight {
+    display: grid;
+    grid-template-rows: 90px auto;
+}
+
+.rightWrap {
+    background: #E8E8E8;
+    border-radius: 5px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 100%;
+    /* display: flex;
+    flex-direction: column; */
+    gap: 15px;
+    height: 302px;
+
+
+}
+
+.nameWrap {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 15px;
+}
+
+.catMrtWrap {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+}
+
+.subText {
+    font-weight: 500;
+    line-height: 20px;
+}
+
+
+
+
+.dateTime {
+    font-weight: 700;
+    color: #666666;
+    width: 193px;
+    height: 35px;
+    border: none;
+    appearance: none;
+    -moz-appearance: none;
+
+}
+
+
+/*== Squeeze original format out of range ==*/
+.dateTime:before {
+    content: attr(placeholder);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+    /* width: 149px; */
+    padding: 5px 10px;
+}
+
+
+/*== Leave ==*/
+.dateTime::-webkit-datetime-edit-year-field {
+    padding-left: 149px;
+}
+
+.dateTime::-webkit-calendar-picker-indicator {
+    width: 24px;
+    height: 24px;
+    padding-right: 10px;
+    background-image: url("../imgs/AttractionPage/icon_calendar.png");
+}
+
+.dateTimeSelected {
+    font-weight: 700;
+    color: #666666;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    width: 193px;
+    /* hold calendar steady */
+    padding: 5px 0px 5px 10px;
+    height: 35px;
+    border: none;
+    appearance: none;
+    -moz-appearance: none;
+}
+
+.dateTimeSelected::-webkit-calendar-picker-indicator {
+    width: 24px;
+    height: 24px;
+    padding-right: 10px;
+    justify-self: end;
+    background-image: url("../imgs/AttractionPage/icon_calendar.png");
+}
+
+
+
+.chooseLable {
+    margin-left: 11px;
+}
+
+.noonWrap {
+    margin-left: 18px;
+}
+
+input[type="radio"]:after {
+    margin-left: 9px;
+    display: inline-block;
+    position: relative;
+    top: -4px;
+    left: -11px;
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    content: "";
+    visibility: visible;
+    background-color: #ffffff;
+
+}
+
+input[type="radio"]:checked:after {
+    margin-left: 9px;
+    display: inline-block;
+    position: relative;
+    top: -6px;
+    left: -11px;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    content: "";
+    visibility: visible;
+    background-color: #448899;
+    border: 2px solid #ffffff;
+}
+
+input[type="radio"]:hover {
+    cursor: pointer;
+}
+
+.feeWrap {
+    display: flex;
+    align-items: center;
+}
+
+.morningFee {
+    display: none;
+}
+
+.noonFee {
+    display: none;
+}
+
+
+.reservation {
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 16px;
+    width: 154px;
+    height: 36px;
+    margin-top: 10px;
+    margin-bottom: 41px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    border-radius: 5px;
+    background-color: #448899;
+}
+
+.reservation:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+/* ======== Top Left ======== */
+.topLeft {
+    position: relative;
+}
+
+.sliderWrap {
+    border-radius: 5px;
+
+}
+
+.sliderArrowLeft {
+    position: absolute;
+    left: 10px;
+    top: 185px;
+    opacity: 0.7;
+}
+
+.sliderArrowRight {
+    position: absolute;
+    right: 10px;
+    top: 185px;
+    opacity: 0.7;
+}
+
+.sliderArrow:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.dotControl {
+    position: absolute;
+    bottom: 13px;
+    left: 50%;
+    transform: translate(-50%, -13%);
+    display: flex;
+    gap: 12px;
+    z-index: 99;
+
+}
+
+.dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    opacity: 0.7;
+
+}
+
+.currentDot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 1.5px solid #ffffff;
+    background-color: #000000;
+    opacity: 0.7;
+
+}
+
+.slider {
+    width: 100%;
+    height: 400px;
+    aspect-ratio: 540/400;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 5px;
+    padding: 3px 0;
+}
+
+.preSlider {
+    display: none;
+}
+
+.newSlider {
+    width: 100%;
+    height: 400px;
+    aspect-ratio: 540/400;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 5px;
+    padding: 3px 0;
+}
+
+
+
+/* ======== Bottom ======== */
+.attractionBottomWrap {
+    margin: 40px auto;
+    color: #666666;
+    /* display: grid;
+    grid-template-rows: 1fr; */
+    /* display: flex;
+    flex-direction: column; */
+    gap: 20px;
+}
+
+.descriptionWrap {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+
+.addressWrap {
+    grid-template-rows: 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.addressLine1Wrap,
+.transportLine1Wrap {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+
+
+@media(max-width:730px) {
+    /* main {
+        width: 90%;
+    } */
+
+    /* ===== Top ===== */
+    .attractionTopWrap {
+        height: 400px;
+        margin: auto auto 40px auto;
+        font-weight: 700;
+        color: #666666;
+        display: inline;
+        gap: 30px;
+    }
+
+    .topRight {
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 40px;
+    }
+
+    .slider {
+        width: 100%;
+        height: 350px;
+        aspect-ratio: 360/350;
+        object-fit: cover;
+        object-position: center center;
+        border-radius: 5px;
+        padding: 3px 0;
+    }
+
+    .attractionBottomWrap {
+        width: 90%;
+        margin: 40px auto;
+        display: block;
+    }
+}
