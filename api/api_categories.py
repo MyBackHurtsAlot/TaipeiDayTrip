@@ -46,6 +46,7 @@ def cat():
         status = 200
         cat_result = all_cats
         # raise Exception
+        print(cat_result)
 
     # 500
     except Exception:
