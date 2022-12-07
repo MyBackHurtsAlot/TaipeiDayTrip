@@ -13,6 +13,10 @@ body {
     /* height: 100%; */
 }
 
+a {
+    text-decoration: none;
+}
+
 
 
 /* header */
@@ -56,14 +60,6 @@ body {
     color: #666666;
 }
 
-.navBarBtnItinerary {
-    margin-right: 20px;
-}
-
-.navBarBtnLogin {
-    margin-left: 20px;
-}
-
 /* ======= banner ======= */
 .heroContainer {
     background-image: url("../imgs/welcome.png");
@@ -71,8 +67,9 @@ body {
     background-size: cover;
     width: 100%;
     height: 320px;
+    margin-bottom: 35px;
     display: grid;
-
+    position: relative;
 }
 
 .bannerContainer {
@@ -143,6 +140,199 @@ body {
     transform: scale(1.02);
 }
 
+/* ======== Membership ======== */
+.navBarBtnLogin {
+    margin-left: 20px;
+}
+
+.navBarBtnLogout {
+    margin-left: 20px;
+    display: none;
+}
+
+.navBarBtnLogout:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+.navBarBtnLogin:hover,
+.navBarBtnItinerary:hover,
+.navBarTpeText:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 98;
+    backdrop-filter: blur(1.5px);
+    display: none;
+
+}
+
+.signInContainer {
+    width: 340px;
+    height: 275px;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    display: grid;
+    grid-template-rows: 10px auto;
+    background-color: #fff;
+    z-index: 99;
+    display: none;
+
+}
+
+.registerContainer {
+    width: 340px;
+    height: 332px;
+    padding-bottom: 15px;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 182px;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    display: grid;
+    grid-template-rows: 10px auto;
+    background-color: #fff;
+    z-index: 99;
+    display: none;
+
+}
+
+.registerColorMatte,
+.signInColorMatte {
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+
+}
+
+
+.registerContainerWrap,
+.signInContainerWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 auto;
+
+}
+
+.registerText,
+.signInText {
+    font-weight: 700;
+    font-size: 24px;
+    color: #666666;
+    text-align: center;
+}
+
+.regInput,
+.signInInput {
+    width: 310px;
+    height: 47px;
+    font-size: 16px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    font-weight: 500;
+    padding: 15px;
+}
+
+.registerButton,
+.signInButton {
+    height: 47px;
+    color: #ffffff;
+    background: #448899;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerIsMember,
+.signInNoAccount {
+    font-weight: 500;
+    color: #666666;
+    text-align: center;
+}
+
+.statusMessageWarp {
+    font-weight: 700;
+    font-size: 24px;
+    color: #cd4f4f;
+    width: 340px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 365px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    text-align: center;
+}
+
+.statusMessageWarp {
+    display: none;
+}
+
+.registerButton:hover,
+.signInButton:hover,
+.registerIsMember:hover,
+.signInNoAccount:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    opacity: 0.8;
+}
+
+.error {
+    position: absolute;
+    left: 50%;
+    top: 485px;
+    transform: translate(-50%, -50%);
+    font-weight: 300;
+    font-size: 24px;
+    color: #cd4f4f;
+    background-color: #ffffff;
+    width: 340px;
+    height: 150px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    text-align: center;
+    gap: 15px;
+    display: none;
+}
+
+.cancel {
+    width: 200px;
+    height: 38px;
+    background-color: #337788;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.cancel:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    opacity: 0.8;
+}
+
 /* ======= bannerCat ======== */
 
 .bannerCat {
@@ -164,11 +354,13 @@ body {
 
 .bannerContnet {
     padding: 10px 15px;
+    border-radius: 5px;
 }
 
 .bannerContnet:hover {
+    cursor: pointer;
     background-color: #E8E8E8;
-    transform: scale(1.01);
+    transform: scale(1.02);
 }
 
 /* ======= main ======= */

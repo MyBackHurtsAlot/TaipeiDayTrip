@@ -4,19 +4,25 @@ import json
 import urllib
 import mysql.connector
 from mysql.connector import pooling
+import os
+from dotenv import load_dotenv
+import jwt
+
+# load dotenv
+# load_dotenv()
 
 # Import apis
 from api.api_attractions import api_attractions
-from api.api_attractionId import api_attractionId
-from api.api_categories import api_categories
+from api.api_user import api_user
+
+
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Regist apis
 app.register_blueprint(api_attractions)
-app.register_blueprint(api_attractionId)
-app.register_blueprint(api_categories)
+app.register_blueprint(api_user)
 
 
 # Pages

@@ -20,15 +20,15 @@ sites_pool = pooling.MySQLConnectionPool(
 )
 
 
+# Error message
 def error(msg):
     return {
         "error": True,
         "message": msg
     }
 
+
 # 取得景點資料列表
-
-
 @api_attractions.route("/api/attractions")
 def attractions_list():
     pool = sites_pool.get_connection()
@@ -114,5 +114,83 @@ def attractions_list():
 
     response = make_response(
         att_list, status, {"Content-Type": "application/json"})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
+# 根據景點編號取得景點資料
+@api_attractions.route("/api/attraction/<attractionId>")
+def attraction_Id(attractionId):
+    pool = sites_pool.get_connection()
+    cursor = pool.cursor(buffered=True, dictionary=True)
+
+    # Id result
+    cursor.execute("select * from attractions where id = %s", (attractionId,))
+    id_result = cursor.fetchone()
+    try:
+        attraction_id = int(attractionId)
+        # isint = is_integer(attraction_id)
+        # print(type(attraction_id))
+        if id_result:
+            # Turn str into list
+            imgs = id_result["images"].split(" ")
+            id_result["images"] = imgs
+            id_list = {
+                "data": id_result
+            }
+            status = 200
+            # print(id_result)
+        else:
+            id_list = error("景點編號不正確")
+            status = 400
+
+    # print(id_result)
+    # try:
+    #     return
+    except Exception:
+        id_list = error("伺服器內部錯誤")
+        status = 500
+    finally:
+        cursor.close()
+        pool.close()
+
+    response = make_response(
+        id_list, status, {"Content-Type": "application/json"})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
+# Categories
+@api_attractions.route("/api/categories")
+def cat():
+    pool = sites_pool.get_connection()
+    cursor = pool.cursor(buffered=True, dictionary=True)
+
+    cursor.execute("select distinct category from attractions")
+    result = cursor.fetchall()
+
+    # append vlaue of categories into list
+    cat_data = []
+    for i in result:
+        cat_data.append(i["category"])
+        all_cats = {"data": cat_data}
+
+    # 200
+    try:
+        status = 200
+        cat_result = all_cats
+        # raise Exception
+        # print(cat_result)
+
+    # 500
+    except Exception:
+        all_cats = error("伺服器內部錯誤")
+        status = 500
+    finally:
+        cursor.close()
+        pool.close()
+
+    response = make_response(
+        all_cats, status, {"Content-Type": "application/json"})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response

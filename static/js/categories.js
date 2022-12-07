@@ -17,7 +17,6 @@ categories = () => {
 
             bannerContnet.addEventListener("click", () => {
                 keywordInput.value = bannerContnet.innerHTML
-
             })
             bannerCat.appendChild(bannerContnet)
             bannerContnet.appendChild(searhCat)
