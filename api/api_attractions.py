@@ -4,20 +4,12 @@ import json
 import urllib
 import mysql.connector
 from mysql.connector import pooling
-
+import api.connection as pool
 
 api_attractions = Blueprint("api_attractions", __name__)
 
 # Connection Pool
-sites_pool = pooling.MySQLConnectionPool(
-    pool_name="extension",
-    pool_size=5,
-    pool_reset_session=True,
-    host="localhost",
-    user="root",
-    password="1234",
-    database="taipei_attractions"
-)
+sites_pool = pool.pool()
 
 
 # Error message

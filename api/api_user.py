@@ -6,6 +6,7 @@ import datetime
 import json
 import mysql.connector
 from mysql.connector import pooling
+import api.connection as pool
 
 # load dotenv
 load_dotenv()
@@ -13,16 +14,9 @@ load_dotenv()
 
 api_user = Blueprint("api_user", __name__)
 secret = os.getenv("secret")
-# Connection Pool
-sites_pool = pooling.MySQLConnectionPool(
-    pool_name="extension",
-    pool_size=5,
-    pool_reset_session=True,
-    host="localhost",
-    user="root",
-    password="1234",
-    database="taipei_attractions"
-)
+
+# pool
+sites_pool = pool.pool()
 
 
 # ======== Error message ========
@@ -138,6 +132,7 @@ def member_SignIn():
                 algorithm='HS256')
             signed_In = {"ok": True}
             status = 200
+            # print(secret)
             # print(encoded)
             response = make_response(
                 signed_In, status, {"Content-Type": "application/json"})

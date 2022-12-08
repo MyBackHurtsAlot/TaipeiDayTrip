@@ -38,7 +38,7 @@ registerToSignIn.onclick = () => {
 const checkStatus = async () => {
     const response = await fetch(`/api/user/auth`)
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
     let memberInfo = data.data
     if (memberInfo !== null) {
         navBarBtnLogout.style.display = "block"
@@ -75,7 +75,7 @@ const error = document.querySelector(".error")
 
 
 // ============= Status message ======================
-let statusMsg = (s) => {
+const statusMsg = (s) => {
     error.style.display = "flex"
     error.innerHTML = s
     let cancel = document.createElement("div")
@@ -90,7 +90,7 @@ let statusMsg = (s) => {
     }
 }
 // ======== Regex ========
-const regexName = /^[\w]([^<>\s]){2,20}$/
+const regexName = /^[\w\u4E00-\u9FFF]([^<>\s]){1,20}$/
 const regexEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 const regexPassword = /^[\w]([^<>\s]){7,20}$/
 // console.log(regexName.test(" "))
@@ -101,12 +101,18 @@ registerButton.onclick = () => {
     let memberPassword = registerPassword.value
     // console.log(memberName)
     if (memberName === "" || memberEmail === "" || memberPassword === "") {
+        error.style.color = "#cd4f4f"
         statusMsg("註冊一下啦")
     } else if (!regexName.test(memberName)) {
+        error.style.color = "#cd4f4f"
         statusMsg("請輸入 2 - 20 字之使用者名稱 (不含空白)")
+        console.log(memberName)
     } else if (!regexEmail.test(memberEmail)) {
+        error.style.color = "#cd4f4f"
         statusMsg("請輸入正確E-mail")
+        console.log(memberEmail)
     } else if (!regexPassword.test(memberPassword)) {
+        error.style.color = "#cd4f4f"
         statusMsg("請輸入8 - 20 位密碼")
     } else {
         let newMember = {
@@ -127,13 +133,13 @@ registerButton.onclick = () => {
             console.log(data)
             if (data.ok) {
                 statusMsg("註冊成功")
-                const error = document.querySelector(".error")
                 error.style.color = "#6274c1"
             } else {
-
+                error.style.color = "#cd4f4f"
                 statusMsg("Email已被註冊")
             }
         }).catch(() => {
+            error.style.color = "#cd4f4f"
             statusMsg("伺服器內部錯誤")
         })
     }
@@ -150,6 +156,7 @@ signInButton.onclick = async () => {
     // console.log(signInEmail)
 
     if (signInEmail === "" || signInPassword === "") {
+        error.style.color = "#cd4f4f"
         statusMsg("沒有會員嗎？")
     } else {
         let signInMember = {
@@ -170,6 +177,7 @@ signInButton.onclick = async () => {
             // window.location.assign(url) // 會被XXS!!!!!!!!!!!
             window.location.reload()
         } else if (data.error) {
+            error.style.color = "#cd4f4f"
             statusMsg("帳號或密碼錯誤")
         }
     }
@@ -186,4 +194,3 @@ navBarBtnLogout.onclick = async () => {
         window.location.reload()
     }
 }
-

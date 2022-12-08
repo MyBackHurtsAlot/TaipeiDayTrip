@@ -303,7 +303,7 @@ a {
     top: 485px;
     transform: translate(-50%, -50%);
     font-weight: 300;
-    font-size: 24px;
+    font-size: 18px;
     color: #cd4f4f;
     background-color: #ffffff;
     width: 340px;
@@ -325,6 +325,9 @@ a {
     background-color: #337788;
     color: #fff;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cancel:hover {
