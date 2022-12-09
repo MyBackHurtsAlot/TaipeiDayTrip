@@ -5,6 +5,8 @@ const signInContainer = document.querySelector(".signInContainer")
 const signInToRegister = document.querySelector(".signInNoAccount")
 const registerToSignIn = document.querySelector(".registerIsMember")
 const navBarTpeText = document.querySelector(".navBarTpeText")
+const iconClose = document.querySelectorAll(".iconClose")
+const error = document.querySelector(".error")
 
 // showes signIn block
 navBarBtnLogin.onclick = () => {
@@ -12,12 +14,14 @@ navBarBtnLogin.onclick = () => {
     overlay.style.display = "block"
 }
 
+
+
 // Hides all block
 overlay.onclick = () => {
     signInContainer.style.display = "none"
     registerContainer.style.display = "none"
     overlay.style.display = "none"
-
+    error.style.display = "none"
 }
 
 // Change to register block
@@ -31,6 +35,17 @@ registerToSignIn.onclick = () => {
     signInContainer.style.display = "grid"
     registerContainer.style.display = "none"
 
+}
+// close block with iconClose
+iconClose[0].onclick = () => {
+    signInContainer.style.display = "none"
+    registerContainer.style.display = "none"
+    overlay.style.display = "none"
+}
+iconClose[1].onclick = () => {
+    signInContainer.style.display = "none"
+    registerContainer.style.display = "none"
+    overlay.style.display = "none"
 }
 
 // =========== Check if loggedin when onload ================
@@ -70,11 +85,11 @@ const registerPassword = document.querySelector(".registerPassword")
 const registerContainerWrap = document.querySelector(".registerContainerWrap")
 const signInContainerWrap = document.querySelector(".signInContainerWrap")
 const regInput = document.querySelector(".regInput")
-const error = document.querySelector(".error")
+
 
 
 // ============= Status message ======================
-const statusMsg = (s) => {
+const popUpMsg = (s) => {
     error.style.color = "#cd4f4f"
     error.style.display = "flex"
     error.innerHTML = s
@@ -102,18 +117,18 @@ registerButton.onclick = () => {
     // console.log(memberName)
     if (memberName === "" || memberEmail === "" || memberPassword === "") {
 
-        statusMsg("註冊一下啦")
+        popUpMsg("註冊一下啦")
     } else if (!regexName.test(memberName)) {
 
-        statusMsg("請輸入 2 - 20 字之使用者名稱 (不含空白)")
-        console.log(memberName)
+        popUpMsg("請輸入 2 - 20 字之使用者名稱 (不含空白)")
+        // console.log(memberName)
     } else if (!regexEmail.test(memberEmail)) {
 
-        statusMsg("請輸入正確E-mail")
-        console.log(memberEmail)
+        popUpMsg("請輸入正確E-mail")
+        // console.log(memberEmail)
     } else if (!regexPassword.test(memberPassword)) {
 
-        statusMsg("請輸入8 - 20 位密碼")
+        popUpMsg("請輸入8 - 20 位密碼")
     } else {
         let newMember = {
             "memberName": memberName,
@@ -130,17 +145,17 @@ registerButton.onclick = () => {
         }).then((response) => {
             return response.json()
         }).then((data) => {
-            console.log(data)
+            // console.log(data)
             if (data.ok) {
-                statusMsg("註冊成功")
+                popUpMsg("註冊成功")
                 error.style.color = "#6274c1"
             } else {
 
-                statusMsg("Email已被註冊")
+                popUpMsg("Email已被註冊")
             }
         }).catch(() => {
 
-            statusMsg("伺服器內部錯誤")
+            popUpMsg("伺服器內部錯誤")
         })
     }
 }
@@ -157,7 +172,7 @@ signInButton.onclick = async () => {
 
     if (signInEmail === "" || signInPassword === "") {
 
-        statusMsg("沒有會員嗎？")
+        popUpMsg("沒有會員嗎？")
     } else {
         let signInMember = {
             "signInEmail": signInEmail,
@@ -178,7 +193,7 @@ signInButton.onclick = async () => {
             window.location.reload()
         } else if (data.error) {
 
-            statusMsg("帳號或密碼錯誤")
+            popUpMsg("帳號或密碼錯誤")
         }
     }
 }

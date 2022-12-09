@@ -145,6 +145,20 @@ a {
     margin-left: 20px;
 }
 
+.iconClose {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 28px;
+    left: 300px;
+}
+
+.iconClose:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+
+}
+
 .navBarBtnLogout {
     margin-left: 20px;
     display: none;
