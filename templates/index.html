@@ -10,33 +10,67 @@
 </head>
 
 <body>
-    <!-- header -->
-    <nav class="navBar">
-        <div class="navBarContainer">
-            <div class="navBarTpe">
-                <p class="navBarTpeText">台北一日遊</p>
-            </div>
-            <div class="navBarBtn">
-                <div class=".navBarBtnItinerary">預定行程</div>
-                <div class="navBarBtnLogin">登入/註冊</div>
-            </div>
-        </div>
-    </nav>
-    <!-- banner -->
-    <div class="heroContainer">
-        <div class="bannerContainer">
-            <p class="bannerTitle">輕鬆享受台北一日悠閒</p>
-            <p class="bannerSub">探索每個角落，體驗城市的深度旅遊行程</p>
-            <span class="magnifier">
-                <input type="text" placeholder="請輸入景點名稱查詢" class="bannerSearchBar" />
-                <span class="searchIconBackground">
-                    <img src="../static/imgs/icon_search.png" alt="" class="searchIcon">
-                </span>
-            </span>
-            <div class="bannerCat">
-            </div>
-        </div>
+    <!-- Overlay -->
+    <div class="overlay"></div>
+    <div class="error">
     </div>
+    <!-- header -->
+    <header>
+        <nav class="navBar">
+            <div class="navBarContainer">
+                <div class="navBarTpe">
+                    <a href="http://18.139.142.46:3000/" class="navBarTpeText">台北一日遊</a>
+                </div>
+                <div class="navBarBtn">
+                    <div class="navBarBtnItinerary">預定行程</div>
+                    <div class="navBarBtnLogout">登出系統</div>
+                    <div class="navBarBtnLogin">登入/註冊</div>
+                </div>
+            </div>
+        </nav>
+        <!-- banner -->
+        <div class="heroContainer">
+            <div class="bannerContainer">
+                <p class="bannerTitle">輕鬆享受台北一日悠閒</p>
+                <p class="bannerSub">探索每個角落，體驗城市的深度旅遊行程</p>
+                <span class="magnifier">
+                    <input type="text" placeholder="請輸入景點名稱查詢" class="bannerSearchBar" />
+                    <span class="searchIconBackground">
+                        <img src="../static/imgs/icon_search.png" alt="" class="searchIcon">
+                    </span>
+                </span>
+                <div class="bannerCat">
+                </div>
+            </div>
+            <!-- Register -->
+            <div class="registerContainer">
+                <div class="registerColorMatte"></div>
+                <div class="registerContainerWrap">
+                    <div class="registerText">註冊會員帳號</div>
+                    <img src="{{ url_for( 'static', filename = 'imgs/icon_close.png') }}" alt="" class="iconClose">
+                    <input type="text" placeholder="輸入姓名" class="regInput registerName">
+                    <input type="e-mail" placeholder="輸入電子信箱" class="regInput registerEmail">
+                    <input type="password" placeholder="輸入密碼" class="regInput registerPassword">
+                    <div class="registerButton">註冊新帳戶</div>
+                    <div class="registerIsMember">已經有帳戶了？點此登入</div>
+                </div>
+            </div>
+
+            <!-- SignIn -->
+            <div class="signInContainer">
+                <div class="signInColorMatte"></div>
+                <div class="signInContainerWrap">
+                    <div class="signInText">登入會員帳號</div>
+                    <img src="{{ url_for( 'static', filename = 'imgs/icon_close.png') }}" alt="" class="iconClose">
+                    <input type="e-mail" placeholder="輸入電子信箱" class="signInInput signInEmail">
+                    <input type="password" placeholder="輸入密碼" class="signInInput signInPassword">
+                    <div class="signInButton">登入帳戶</div>
+                    <div class="signInNoAccount">還沒有帳戶？ 點此註冊</div>
+                </div>
+            </div>
+        </div>
+
+
     </header>
 
 
@@ -55,11 +89,11 @@
             <p class="footerText">COPYRIGHT © 2022 台北一日遊</p>
         </div>
     </footer>
-    <!-- <script type = "module" src = "../static/js/footage.js"></script> -->
     <!-- <script type="text/javascript" src="../static/js/footage.js"></script> -->
+    <script type="text/javascript" src="../static/js/membership.js"></script>
     <script type="text/javascript" src="../static/js/index.js"></script>
-    <script type="text/javascript" src="../static/js/keyword.js"></script>
     <script type="text/javascript" src="../static/js/categories.js"></script>
+
 </body>
 
 </html>
