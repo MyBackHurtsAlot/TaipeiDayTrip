@@ -10,6 +10,7 @@ html,
 body {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 16px;
+    color: #666666;
     /* height: 100%; */
 }
 
@@ -17,7 +18,9 @@ a {
     text-decoration: none;
 }
 
-
+.footerExtender {
+    display: flex;
+}
 
 /* header */
 /* navBar */
@@ -58,7 +61,11 @@ a {
     font-weight: 500;
     line-height: 13px;
     color: #666666;
+
 }
+
+
+
 
 /* ======= banner ======= */
 .heroContainer {
@@ -195,7 +202,7 @@ a {
     background-color: #fff;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 218px;
     transform: translate(-50%, -50%);
     border-radius: 6px;
     display: grid;
@@ -213,7 +220,7 @@ a {
     background-color: #fff;
     position: absolute;
     left: 50%;
-    top: 182px;
+    top: 233px;
     transform: translate(-50%, -50%);
     border-radius: 6px;
     display: grid;
@@ -343,6 +350,8 @@ a {
     align-items: center;
     justify-content: center;
 }
+
+
 
 .cancel:hover {
     cursor: pointer;

@@ -7,14 +7,70 @@
 {% endblock %}
 
 {% block content %}
-<div class="bookWrap">
-    .
+<div class="bookingWrap">
+    <div class="purchasedItemsWrap">
+        <div class="purchasedItems_Hello">您好， <span class=hello_Username> </span> ， 待預定的行程如下</div>
+        <div class="purchasedItems_All_Wrap">
+            <div class="purchasedItems_ImgContainer"></div>
+            <div class="purchasedItems_Info_Wrap">
+                <div class="purchasedItems_Name"></div>
+                <div class="purchasedItems_Date">日期：</div>
+                <div class="purchasedItems_Time">時間：</div>
+                <div class="purchasedItems_Fee">費用：</div>
+                <div class="purchasedItems_Address">地點：</div>
+            </div>
+            <img src="{{ url_for( 'static', filename = 'imgs/BookingPage/icon_delete.png') }}" alt=""
+                class="iconDelete">
+        </div>
+    </div>
     <hr>
-
+    <div class="memberInfoWrap">
+        <div class="yourContect">
+            您的聯絡資訊：
+        </div>
+        <div class="yourName">
+            聯絡資訊：
+            <input type="text" class="yourName_input">
+        </div>
+        <div class="yourEmail">
+            聯絡信箱：
+            <input type="E-mail" class="yourEmail_input">
+        </div>
+        <div class="yourNumber">
+            手機號碼：
+            <input type="text" class="yourNumber_input">
+        </div>
+        <div class="memberInfo_Warning">
+            請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。
+        </div>
+    </div>
     <hr>
-
+    <div class="paymentWrap">
+        <div class="paymentInfo">
+            信用卡付款資訊
+        </div>
+        <div class="creditNumber">
+            卡片號碼：
+            <input type="text" class="creditNumber_number">
+        </div>
+        <div class="creditExp">
+            過期時間：
+            <input type="text" class="creditExp_exp">
+        </div>
+        <div class="cvv">
+            驗證密碼：
+            <input type="text" class="cvv_cvv">
+        </div>
+    </div>
     <hr>
-
+    <div class="totalWrap">
+        <div class="price">
+            總價：
+        </div>
+        <div class="payConfirm">
+            <div class="payConfirm_text">確認訂購並付款</div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

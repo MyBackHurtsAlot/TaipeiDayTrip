@@ -40,24 +40,32 @@ registerToSignIn.onclick = () => {
 iconClose[0].onclick = () => {
     signInContainer.style.display = "none"
     registerContainer.style.display = "none"
+    error.style.display = "none"
     overlay.style.display = "none"
 }
 iconClose[1].onclick = () => {
     signInContainer.style.display = "none"
     registerContainer.style.display = "none"
+    error.style.display = "none"
     overlay.style.display = "none"
 }
 
 // =========== Check if loggedin when onload ================
-const checkStatus = async () => {
+
+// isolate fetchMemberInfo function for further usage
+const fetchMemberInfo = async () => {
     const response = await fetch(`/api/user/auth`)
     const data = await response.json()
-    // console.log(data)
-    let memberInfo = data.data
+    memberInfo = data.data
+}
+const checkStatus = async () => {
+    await fetchMemberInfo()
+    // console.log(memberInfo)
     if (memberInfo !== null) {
         navBarBtnLogout.style.display = "block"
         navBarBtnLogin.style.display = "none"
     }
+    return memberInfo
 }
 
 // For futher flexable
@@ -70,7 +78,8 @@ let addLoadEvent = (checkStatus) => {
             if (originalLoad) {
                 originalLoad()
             }
-            checkStatus()
+            let memberInfo = checkStatus();
+            // checkStatus()
         }
     }
 }
@@ -88,20 +97,21 @@ const regInput = document.querySelector(".regInput")
 
 
 
-// ============= Status message ======================
-const popUpMsg = (s) => {
+// ============= popUp message ======================
+const popUpMsg = (message, cancelOkMessage) => {
     error.style.color = "#cd4f4f"
     error.style.display = "flex"
-    error.innerHTML = s
+    error.innerHTML = message
     let cancel = document.createElement("div")
     cancel.className = "cancel"
-    let cancelOk = document.createTextNode("ok")
+    let cancelOk = document.createTextNode(cancelOkMessage)
     cancelOk.className = "cancelOk"
     // cancel = document.createTextNode("OK")
     error.appendChild(cancel)
     cancel.appendChild(cancelOk)
     cancel.onclick = () => {
         error.style.display = "none"
+        overlay.style.display = "none"
     }
 }
 // ======== Regex ========
@@ -117,18 +127,18 @@ registerButton.onclick = () => {
     // console.log(memberName)
     if (memberName === "" || memberEmail === "" || memberPassword === "") {
 
-        popUpMsg("註冊一下啦")
+        popUpMsg("註冊一下啦", "好的")
     } else if (!regexName.test(memberName)) {
 
-        popUpMsg("請輸入 2 - 20 字之使用者名稱 (不含空白)")
+        popUpMsg("請輸入 2 - 20 字之使用者名稱 (不含空白)", "好的")
         // console.log(memberName)
     } else if (!regexEmail.test(memberEmail)) {
 
-        popUpMsg("請輸入正確E-mail")
+        popUpMsg("請輸入正確E-mail", "好的")
         // console.log(memberEmail)
     } else if (!regexPassword.test(memberPassword)) {
 
-        popUpMsg("請輸入8 - 20 位密碼")
+        popUpMsg("請輸入8 - 20 位密碼", "好的")
     } else {
         let newMember = {
             "memberName": memberName,
@@ -147,15 +157,15 @@ registerButton.onclick = () => {
         }).then((data) => {
             // console.log(data)
             if (data.ok) {
-                popUpMsg("註冊成功")
+                popUpMsg("註冊成功", "好的")
                 error.style.color = "#6274c1"
             } else {
 
-                popUpMsg("Email已被註冊")
+                popUpMsg("Email已被註冊", "好的")
             }
         }).catch(() => {
 
-            popUpMsg("伺服器內部錯誤")
+            popUpMsg("伺服器內部錯誤", "好的")
         })
     }
 }
@@ -172,7 +182,7 @@ signInButton.onclick = async () => {
 
     if (signInEmail === "" || signInPassword === "") {
 
-        popUpMsg("沒有會員嗎？")
+        popUpMsg("沒有會員嗎？", "是的")
     } else {
         let signInMember = {
             "signInEmail": signInEmail,
@@ -193,7 +203,7 @@ signInButton.onclick = async () => {
             window.location.reload()
         } else if (data.error) {
 
-            popUpMsg("帳號或密碼錯誤")
+            popUpMsg("帳號或密碼錯誤", "好的")
         }
     }
 }
@@ -208,4 +218,20 @@ navBarBtnLogout.onclick = async () => {
     if (data.ok) {
         window.location.reload()
     }
+}
+
+//============= Booking ===================
+const navBarBtnItinerary = document.querySelector(".navBarBtnItinerary")
+navBarBtnItinerary.onclick = () => {
+    const checkStatusOnItinerary = async () => {
+        await fetchMemberInfo()
+        // console.log(memberInfo)
+        if (memberInfo === null) {
+            signInContainer.style.display = "grid"
+            overlay.style.display = "block"
+        } else {
+            window.location.href = "/booking"
+        }
+    }
+    checkStatusOnItinerary()
 }

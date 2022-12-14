@@ -29,239 +29,277 @@ showNoonFee.addEventListener("click", () => {
     none.style.display = "none"
 })
 
-// // =========== Window onload ================
-// const navBarBtnLogout = document.querySelector(".navBarBtnLogout")
-// const checkStatus = async () => {
-//     const response = await fetch(`/api/user/auth`)
-//     const data = await response.json()
-//     console.log(data)
-//     let memberInfo = data.data
-//     if (memberInfo !== null) {
-//         navBarBtnLogout.style.display = "block"
-//         navBarBtnLogin.style.display = "none"
-//     }
-// }
-// checkStatus()
 
 // ======= Fetch =======
-let attractionId = 1
+// let attractionId = 1
 
-window.addEventListener("load", () => {
-    // Fetch path name(type:string) when window is loaded then split
-    let path = window.location.pathname.split("/")
+let path = window.location.pathname.split("/")
 
-    attractionId = path[2]
+let attractionId = path[2]
 
-    getAttractionPage = async () => {
-        const response = await fetch(`/api/attraction/${attractionId}`)
-        const data = await response.json()
+getAttractionPage = async () => {
+    const response = await fetch(`/api/attraction/${attractionId}`)
+    const data = await response.json()
 
-        let attractionData = data.data
+    let attractionData = data.data
 
-        let img = attractionData.images
-        let name = attractionData.name
-        let category = attractionData.category
-        let mrt = attractionData.mrt
-        let description = attractionData.description
-        let address = attractionData.address
-        let transport = attractionData.transport
+    let img = attractionData.images
+    let name = attractionData.name
+    let category = attractionData.category
+    let mrt = attractionData.mrt
+    let description = attractionData.description
+    let address = attractionData.address
+    let transport = attractionData.transport
 
-        // ====== Change Title ========
-        document.title = name
+    // ====== Change Title ========
+    document.title = name
 
-        // ======= Top Right Infos ========
-        let rightText = document.querySelector(".rightText")
-        rightText.className = "rightText"
+    // ======= Top Right Infos ========
+    let rightText = document.querySelector(".rightText")
+    rightText.className = "rightText"
 
-        //NAME
-        let nameWrap = document.createElement("div")
-        nameWrap.className = "nameWrap"
-        let topLine1 = document.createTextNode(name)
+    //NAME
+    let nameWrap = document.createElement("div")
+    nameWrap.className = "nameWrap"
+    let topLine1 = document.createTextNode(name)
 
-        //CATEGORY
-        let catMrtWrap = document.createElement("div")
-        catMrtWrap.className = "catMrtWrap"
-        let topLine2 = document.createTextNode(category + " at " + mrt)
+    //CATEGORY
+    let catMrtWrap = document.createElement("div")
+    catMrtWrap.className = "catMrtWrap"
+    let topLine2 = document.createTextNode(category + " at " + mrt)
 
-        rightText.appendChild(nameWrap)
-        nameWrap.appendChild(topLine1)
-        rightText.appendChild(catMrtWrap)
-        catMrtWrap.appendChild(topLine2)
+    rightText.appendChild(nameWrap)
+    nameWrap.appendChild(topLine1)
+    rightText.appendChild(catMrtWrap)
+    catMrtWrap.appendChild(topLine2)
 
-        // ======== Bottom Infos ========
-        let attractionBottomWrap = document.querySelector(".attractionBottomWrap")
-        attractionBottomWrap.className = "attractionBottomWrap"
+    // ======== Bottom Infos ========
+    let attractionBottomWrap = document.querySelector(".attractionBottomWrap")
+    attractionBottomWrap.className = "attractionBottomWrap"
 
-        // Description
-        let descriptionWrap = document.createElement("div")
-        descriptionWrap.className = "descriptionWrap"
-        let Spotdescription = document.createTextNode(description)
+    // Description
+    let descriptionWrap = document.createElement("div")
+    descriptionWrap.className = "descriptionWrap"
+    let Spotdescription = document.createTextNode(description)
 
-        // Address
-        let addressWrap = document.createElement("div")
-        addressWrap.className = "addressWrap"
-        let addressLine1Wrap = document.createElement("div")
-        addressLine1Wrap.className = "addressLine1Wrap"
-        let addressLine1 = document.createTextNode("景點地址：")
-        addressLine1.className = "addressLine1"
-        let addressLine2Wrap = document.createElement("div")
-        addressLine2Wrap.className = "addressLine2Wrap"
-        let addressLine2 = document.createTextNode(address)
-        addressLine2.className = "addressLine2"
+    // Address
+    let addressWrap = document.createElement("div")
+    addressWrap.className = "addressWrap"
+    let addressLine1Wrap = document.createElement("div")
+    addressLine1Wrap.className = "addressLine1Wrap"
+    let addressLine1 = document.createTextNode("景點地址：")
+    addressLine1.className = "addressLine1"
+    let addressLine2Wrap = document.createElement("div")
+    addressLine2Wrap.className = "addressLine2Wrap"
+    let addressLine2 = document.createTextNode(address)
+    addressLine2.className = "addressLine2"
 
-        // Transport
-        let transportWrap = document.createElement("div")
-        transportWrap.className = "transportWrap"
-        let transportLine1Wrap = document.createElement("div")
-        transportLine1Wrap.className = "transportLine1Wrap"
-        let transportLine1 = document.createTextNode("交通方式：")
-        transportLine1.className = "transportLine1"
-        let transportLine2Wrap = document.createElement("div")
-        transportLine2Wrap.className = "transportLine2Wrap"
-        let transportLine2 = document.createTextNode(transport)
-        transportLine2.className = "transportLine2"
+    // Transport
+    let transportWrap = document.createElement("div")
+    transportWrap.className = "transportWrap"
+    let transportLine1Wrap = document.createElement("div")
+    transportLine1Wrap.className = "transportLine1Wrap"
+    let transportLine1 = document.createTextNode("交通方式：")
+    transportLine1.className = "transportLine1"
+    let transportLine2Wrap = document.createElement("div")
+    transportLine2Wrap.className = "transportLine2Wrap"
+    let transportLine2 = document.createTextNode(transport)
+    transportLine2.className = "transportLine2"
 
-        attractionBottomWrap.appendChild(descriptionWrap)
-        descriptionWrap.appendChild(Spotdescription)
-        attractionBottomWrap.appendChild(addressWrap)
-        addressWrap.appendChild(addressLine1Wrap)
-        addressLine1Wrap.appendChild(addressLine1)
-        addressWrap.appendChild(addressLine2Wrap)
-        addressLine2Wrap.appendChild(addressLine2)
-        attractionBottomWrap.appendChild(transportWrap)
-        transportWrap.appendChild(transportLine1Wrap)
-        transportLine1Wrap.appendChild(transportLine1)
-        transportWrap.appendChild(transportLine2Wrap)
-        transportLine2Wrap.appendChild(transportLine2)
+    attractionBottomWrap.appendChild(descriptionWrap)
+    descriptionWrap.appendChild(Spotdescription)
+    attractionBottomWrap.appendChild(addressWrap)
+    addressWrap.appendChild(addressLine1Wrap)
+    addressLine1Wrap.appendChild(addressLine1)
+    addressWrap.appendChild(addressLine2Wrap)
+    addressLine2Wrap.appendChild(addressLine2)
+    attractionBottomWrap.appendChild(transportWrap)
+    transportWrap.appendChild(transportLine1Wrap)
+    transportLine1Wrap.appendChild(transportLine1)
+    transportWrap.appendChild(transportLine2Wrap)
+    transportLine2Wrap.appendChild(transportLine2)
 
 
-        // ======== Top Left ========
-        // Dots
-        for (let i = 0; i < img.length; i++) {
-            // imgSlider = img[i]
-            let topLeft = document.querySelector(".topLeft")
-            topLeft.className = "topLeft"
-            let dotControl = document.querySelector(".dotControl")
-            dotControl.className = "dotControl"
-
-            let dot = document.createElement("span")
-            dot.setAttribute("num", `${i}`)
-            dot.className = "dot"
-            // dot.setAttribute("src", "../static/imgs/getAttractionPage/dot.png")//USING CSS IS MUCH EASIER
-
-            topLeft.appendChild(dotControl)
-            dotControl.appendChild(dot)
-        }
-
-
-        // Shows FirstImg
-        let currentImg = 0
-        let imgSlider = img[currentImg]
-
+    // ======== Top Left ========
+    // Dots
+    for (let i = 0; i < img.length; i++) {
+        // imgSlider = img[i]
         let topLeft = document.querySelector(".topLeft")
         topLeft.className = "topLeft"
+        let dotControl = document.querySelector(".dotControl")
+        dotControl.className = "dotControl"
 
-        let sliderWrap = document.createElement("div")
-        sliderWrap.className = "sliderWrap"
-        let slider = document.createElement("img")
-        slider.className = "slider"
-        slider.setAttribute("src", imgSlider)
+        let dot = document.createElement("span")
+        dot.setAttribute("num", `${i}`)
+        dot.className = "dot"
+        // dot.setAttribute("src", "../static/imgs/getAttractionPage/dot.png")//USING CSS IS MUCH EASIER
 
-        topLeft.appendChild(sliderWrap)
-        sliderWrap.appendChild(slider)
+        topLeft.appendChild(dotControl)
+        dotControl.appendChild(dot)
+    }
 
-        let dot = 0
 
-        // ======== Slider Right ========
-        let nextImg = document.querySelector(".sliderArrowRight")
-        nextImg.onclick = () => {
+    // Shows FirstImg
+    let currentImg = 0
+    let imgSlider = img[currentImg]
 
-            // Change image to next or set to 0
-            if (currentImg < img.length - 1) {
-                currentImg++
-                // console.log("img =" + currentImg)
-            } else {
-                currentImg = 0
-            }
-            // DON'T NEED TO SET dot to next or set to 1
-            // if (dot < img.length - 1) {
-            //     dot++
-            //     // console.log("dot =" + dot)
-            // } else {
-            //     dot = 1
-            // }
+    let topLeft = document.querySelector(".topLeft")
+    topLeft.className = "topLeft"
 
-            // Append next image when onclick
-            let nextSlider = img[currentImg]
+    let sliderWrap = document.createElement("div")
+    sliderWrap.className = "sliderWrap"
+    let slider = document.createElement("img")
+    slider.className = "slider"
+    slider.setAttribute("src", imgSlider)
 
-            let newSlider = document.createElement("img")
-            newSlider.className = "newSlider"
-            newSlider.setAttribute("src", nextSlider)
+    topLeft.appendChild(sliderWrap)
+    sliderWrap.appendChild(slider)
 
-            sliderWrap.appendChild(newSlider)
+    let dot = 0
 
-            // Add  class name = "slider" to new ones and remove className = "newSlider"
-            document.querySelector(".newSlider").classList.add("slider")
-            document.querySelector(".newSlider").classList.remove("newSlider")
+    // ======== Slider Right ========
+    let nextImg = document.querySelector(".sliderArrowRight")
+    nextImg.onclick = () => {
 
-            // Hide prevImg
-            allSliders = document.querySelectorAll(".slider")
-            for (let i = 1; i < allSliders.length; i++) {
-                allSliders[i - 1].setAttribute("style", "display:none")
-            }
-
-            // Show dots matches img
-            allDots = document.querySelectorAll(".dot")
-            for (let i = 0; i < img.length; i++) {
-                allDots[i].className = allDots[i].className.replace(" currentDot", "")
-            }
-            allDots[currentImg].className += " currentDot";
-        }
-        // Slider Left
-        let prevImg = document.querySelector(".sliderArrowLeft")
-        prevImg.onclick = () => {
-            // console.log(img)
-            if (currentImg === 0) {
-                currentImg += img.length - 1
-                // console.log("img =" + currentImg)
-            } else {
-                currentImg--
-                // console.log("img--" + currentImg)
-            }
-            if (dot === 0) {
-                dot += img.length - 1
-                // console.log("dot =" + dot)
-            } else {
-                dot--
-                // console.log("dot--" + dot)
-            }
-            let prevSlider = img[currentImg]
-            let newSlider = document.createElement("img")
-            newSlider.className = "newSlider"
-            newSlider.setAttribute("src", prevSlider)
-
-            sliderWrap.appendChild(newSlider)
-            document.querySelector(".newSlider").classList.add("slider")
-            document.querySelector(".newSlider").classList.remove("newSlider")
-
-            allSliders = document.querySelectorAll(".slider")
-            for (let i = 1; i < allSliders.length; i++) {
-                // console.log(allSliders[i - 1])
-                // console.log(allSliders)
-                allSliders[i - 1].setAttribute("style", "display:none")
-            }
-
-            allDots = document.querySelectorAll(".dot")
-            for (let i = 0; i < img.length; i++) {
-                allDots[i].className = allDots[i].className.replace(" currentDot", "")
-            }
-            allDots[currentImg].className += " currentDot";
-
+        // Change image to next or set to 0
+        if (currentImg < img.length - 1) {
+            currentImg++
+            // console.log("img =" + currentImg)
+        } else {
+            currentImg = 0
         }
 
+
+        // Append next image when onclick
+        let nextSlider = img[currentImg]
+
+        let newSlider = document.createElement("img")
+        newSlider.className = "newSlider"
+        newSlider.setAttribute("src", nextSlider)
+
+        sliderWrap.appendChild(newSlider)
+
+        // Add  class name = "slider" to new ones and remove className = "newSlider"
+        document.querySelector(".newSlider").classList.add("slider")
+        document.querySelector(".newSlider").classList.remove("newSlider")
+
+        // Hide prevImg
+        allSliders = document.querySelectorAll(".slider")
+        for (let i = 1; i < allSliders.length; i++) {
+            allSliders[i - 1].setAttribute("style", "display:none")
+        }
+
+        // Show dots matches img
+        allDots = document.querySelectorAll(".dot")
+        for (let i = 0; i < img.length; i++) {
+            allDots[i].className = allDots[i].className.replace(" currentDot", "")
+        }
+        allDots[currentImg].className += " currentDot";
+    }
+    // Slider Left
+    let prevImg = document.querySelector(".sliderArrowLeft")
+    prevImg.onclick = () => {
+        // console.log(img)
+        if (currentImg === 0) {
+            currentImg += img.length - 1
+            // console.log("img =" + currentImg)
+        } else {
+            currentImg--
+            // console.log("img--" + currentImg)
+        }
+        if (dot === 0) {
+            dot += img.length - 1
+            // console.log("dot =" + dot)
+        } else {
+            dot--
+            // console.log("dot--" + dot)
+        }
+        let prevSlider = img[currentImg]
+        let newSlider = document.createElement("img")
+        newSlider.className = "newSlider"
+        newSlider.setAttribute("src", prevSlider)
+
+        sliderWrap.appendChild(newSlider)
+        document.querySelector(".newSlider").classList.add("slider")
+        document.querySelector(".newSlider").classList.remove("newSlider")
+
+        allSliders = document.querySelectorAll(".slider")
+        for (let i = 1; i < allSliders.length; i++) {
+            // console.log(allSliders[i - 1])
+            // console.log(allSliders)
+            allSliders[i - 1].setAttribute("style", "display:none")
+        }
+
+        allDots = document.querySelectorAll(".dot")
+        for (let i = 0; i < img.length; i++) {
+            allDots[i].className = allDots[i].className.replace(" currentDot", "")
+        }
+        allDots[currentImg].className += " currentDot";
 
     }
-    getAttractionPage()
-})
 
+
+}
+getAttractionPage()
+
+// ============== reservation =================
+const reservation = document.querySelector(".reservation")
+const dateTime = document.querySelector(".dateTime")
+const morning = document.querySelector(".morning")
+const noon = document.querySelector(".noon")
+
+const getReservation = async (reservation) => {
+    const response = await fetch(`/api/booking`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(reservation),
+        headers: new Headers({
+            "Content-Type": "application/JSON"
+        })
+    })
+    const data = await response.json()
+    if (data.ok) {
+        window.location.href = "/booking"
+    } else {
+        popUpMsg("伺服器內部錯誤", "QQ")
+    }
+}
+
+reservation.onclick = () => {
+    // Log In Check
+    // console.log(dateTime.value)
+    memberInfo = checkStatus()
+    memberInfo.then(isLoggedIn => {
+        isLoggedIn = isLoggedIn
+        // console.log(isLoggedIn)
+        if (isLoggedIn === null) {
+            signInContainer.style.display = "grid"
+            overlay.style.display = "block"
+            // popUpMsg("請先登入啦", "好的")
+        } else if (dateTime.value === "") {
+            overlay.style.display = "block"
+            popUpMsg("選一下日期啦", "好的")
+        } else if ((!morning.checked) && (!noon.checked)) {
+            overlay.style.display = "block"
+            popUpMsg("選一下時間啦", "好的")
+        } else if (morning.checked) {
+            let reservation = {
+                "attraction": attractionId,
+                "date": dateTime.value,
+                "time": "beforeNoon",
+                "price": 2000
+            }
+            getReservation(reservation)
+        } else if (noon.checked) {
+            let reservation = {
+                "attraction": attractionId,
+                "date": dateTime.value,
+                "time": "afternoon",
+                "price": 2500
+            }
+            getReservation(reservation)
+            // console.log(reservation)
+        }
+    })
+}
 

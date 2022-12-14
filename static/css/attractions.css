@@ -268,7 +268,7 @@ input[type="radio"]:hover {
     transform: translate(-50%, -13%);
     display: flex;
     gap: 12px;
-    z-index: 99;
+    z-index: 97;
 
 }
 

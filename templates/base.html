@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- <div class="footerExtender"> -->
 
 <head>
     {% block head %}
@@ -17,19 +18,19 @@
     <div class="overlay"></div>
     <div class="error"></div>
     <!-- header -->
-    <header>
-        <nav class="navBar">
-            <div class="navBarContainer">
-                <div class="navBarTpe">
-                    <a href="http://18.139.142.46:3000/" class="navBarTpeText">台北一日遊</a>
-                </div>
-                <div class="navBarBtn">
-                    <div class="navBarBtnItinerary">預定行程</div>
-                    <div class="navBarBtnLogout">登出系統</div>
-                    <div class="navBarBtnLogin">登入/註冊</div>
-                </div>
+    <nav class="navBar">
+        <div class="navBarContainer">
+            <div class="navBarTpe">
+                <a href="http://18.139.142.46:3000/" class="navBarTpeText">台北一日遊</a>
             </div>
-        </nav>
+            <div class="navBarBtn">
+                <div class="navBarBtnItinerary">預定行程</div>
+                <div class="navBarBtnLogout">登出系統</div>
+                <div class="navBarBtnLogin">登入/註冊</div>
+            </div>
+        </div>
+    </nav>
+    <header>
 
 
         <!-- Register -->
@@ -80,5 +81,6 @@
     <script type="text/javascript" src="{{ url_for( 'static', filename = 'js/membership.js') }}"></script>
     {% endblock %}
 </body>
+<!-- </div> -->
 
 </html>
