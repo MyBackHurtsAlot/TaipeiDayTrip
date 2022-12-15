@@ -123,9 +123,6 @@ def itinerary_Check():
         order_info = error("伺服器內部錯誤")
         status = 500
     finally:
-        # cursor.close()
-        # pool.close()
-
         response = make_response(
             order_info, status, {
                 "Content-Type": "application/json"}
@@ -158,12 +155,9 @@ def New_Itinerary():
         newReservation = error("伺服器內部錯誤")
         status = 500
     finally:
-        cursor.close()
-        pool.close()
-
-    response = make_response(
-        newReservation, status, {"Content-Type": "application/json"})
-    response.headers.add('Access-Control-Allow-Origin', '*')
+        response = make_response(
+            newReservation, status, {"Content-Type": "application/json"})
+        response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 
@@ -171,14 +165,9 @@ def New_Itinerary():
 @ api_booking.route("/api/booking", methods=["DELETE"])
 def delete_Itinerary():
     delete_Itinerary = request.get_json()
-    # print(delete_Itinerary)
     attraction_Id = delete_Itinerary["atractionId"]
     member_ID = delete_Itinerary["memberId"]
     print(member_ID)
-    # print(attraction_Id)
-
-    # for mutiple orders
-    # delete_Order(attraction_Id)
 
     # order one itinerary at a time
     delete_Order(member_ID)
