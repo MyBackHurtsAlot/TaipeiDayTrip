@@ -21,6 +21,7 @@ input {
 
 /* ============ bookingWrap ============= */
 .bookingWrap {
+    visibility: hidden;
     width: min(90%, 980px);
     display: flex;
     flex-direction: column;

@@ -21,7 +21,7 @@ let isLoggedIn
 
 
 // ====================== Empty Order ===================================
-const emptyOrder = () => {
+const clearTree = () => {
     bookingWrap.style.minHeight = "calc(100vh - 54px - 104px)"
     purchasedItemsWrap.style.display = "none"
     hr[0].style.display = "none"
@@ -30,7 +30,18 @@ const emptyOrder = () => {
     memberInfoWrap.style.display = "none"
     paymentWrap.style.display = "none"
     totalWrap.style.display = "none"
-    popUpMsg("買個行程啦", "QQ")
+}
+const emptyOrder = () => {
+    // bookingWrap.style.minHeight = "calc(100vh - 54px - 104px)"
+    // purchasedItemsWrap.style.display = "none"
+    // hr[0].style.display = "none"
+    // hr[1].style.display = "none"
+    // hr[2].style.display = "none"
+    // memberInfoWrap.style.display = "none"
+    // paymentWrap.style.display = "none"
+    // totalWrap.style.display = "none"
+    clearTree()
+    popUpMsg(`${memberName}，買個行程啦`, "QQ")
     const cancel = document.querySelector(".cancel")
     cancel.onclick = () => {
         window.location.href = "/"
@@ -46,6 +57,7 @@ initialLoad.then(isLoggedIn => {
 
     } else {
         memberId = isLoggedIn["id"]
+        memberName = isLoggedIn["name"]
 
         let reservationUserName = document.createTextNode(isLoggedIn.name)
         hello_Username.appendChild(reservationUserName)
@@ -85,6 +97,7 @@ getData = async () => {
     if (data.error) {
         emptyOrder()
     } else {
+        bookingWrap.style.visibility = "visible"
         let purchasedList = data.data
         console.log(purchasedList)
         let attractionList = purchasedList.attraction
