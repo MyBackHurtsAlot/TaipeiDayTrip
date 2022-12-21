@@ -112,6 +112,19 @@ input {
     margin-bottom: 9px;
 }
 
+.inputWrap {
+    display: flex;
+    align-items: center;
+}
+
+.tpfield {
+    width: 200px;
+    height: 38px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #E8E8E8;
+}
+
 /* ============ totalWrap ============= */
 .totalWrap {
     display: flex;
@@ -138,6 +151,10 @@ input {
     transform: scale(1.02);
     opacity: 0.7;
 }
+
+/* .payConfirm:disabled {
+    cursor: not-allowed;
+} */
 
 @media(max-width:700px) {
 

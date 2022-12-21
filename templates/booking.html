@@ -49,17 +49,20 @@
         <div class="paymentInfo">
             信用卡付款資訊
         </div>
-        <div class="creditNumber">
+        <div class="inputWrap">
             卡片號碼：
-            <input type="text" class="creditNumber_number">
+            <!-- <input type="text" class="creditNumber_number"> -->
+            <div class="tpfield" id="card-number"></div>
         </div>
-        <div class="creditExp">
+        <div class="inputWrap">
             過期時間：
-            <input type="text" class="creditExp_exp">
+            <!-- <input type="text" class="creditExp_exp"> -->
+            <div class="tpfield" id="card-expiration-date"></div>
         </div>
-        <div class="cvv">
+        <div class="inputWrap">
             驗證密碼：
-            <input type="text" class="cvv_cvv">
+            <!-- <input type="text" class="cvv_cvv"> -->
+            <div class="tpfield" id="card-ccv"></div>
         </div>
     </div>
     <hr>
@@ -77,5 +80,8 @@
 
 {% block script %}
 {{ super() }}
+<script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
+<script> TPDirect.setupSDK(126901, 'app_5aHRlxpMBgOCs6QCpJzmmLFVhejopt9PMKiKouykO3Z7SSMQZpnwWGHVXe2d', 'sandbox') </script>
 <script type="text/javascript" src="{{ url_for( 'static', filename = 'js/booking.js') }}"></script>
+<script type="text/javascript" src="{{ url_for( 'static', filename = 'js/order.js') }}"></script>
 {% endblock %}

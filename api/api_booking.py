@@ -2,7 +2,6 @@ from flask import *
 import os
 from dotenv import load_dotenv
 import jwt
-import datetime
 import json
 import mysql.connector
 from mysql.connector import pooling
@@ -90,6 +89,8 @@ def error(msg):
 # ============== Check itinerary ==============
 @ api_booking.route("/api/booking")
 def itinerary_Check():
+    pool = sites_pool.get_connection()
+    cursor = pool.cursor(buffered=True, dictionary=True)
     check_token = request.cookies.get("token")
     check_token = jwt.decode(check_token, secret, algorithms=['HS256'])
     user_Id = check_token["id"]
@@ -123,14 +124,18 @@ def itinerary_Check():
         order_info = error("伺服器內部錯誤")
         status = 500
     finally:
-        response = make_response(
-            order_info, status, {
-                "Content-Type": "application/json"}
-        )
+        cursor.close()
+        pool.close()
+    response = make_response(
+        order_info, status, {
+            "Content-Type": "application/json"}
+    )
     return response
 
 
 # ============== New itinerary ==============
+
+
 @ api_booking.route("/api/booking", methods=["POST"])
 def New_Itinerary():
     new_Itinerary = request.get_json()
@@ -155,9 +160,11 @@ def New_Itinerary():
         newReservation = error("伺服器內部錯誤")
         status = 500
     finally:
-        response = make_response(
-            newReservation, status, {"Content-Type": "application/json"})
-        response.headers.add('Access-Control-Allow-Origin', '*')
+        cursor.close()
+        pool.close()
+    response = make_response(
+        newReservation, status, {"Content-Type": "application/json"})
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 
@@ -165,13 +172,18 @@ def New_Itinerary():
 @ api_booking.route("/api/booking", methods=["DELETE"])
 def delete_Itinerary():
     delete_Itinerary = request.get_json()
+    check_token = request.cookies.get("token")
     attraction_Id = delete_Itinerary["atractionId"]
     member_ID = delete_Itinerary["memberId"]
-    print(member_ID)
+
+    check_token = jwt.decode(check_token, secret, algorithms=['HS256'])
 
     # order one itinerary at a time
-    delete_Order(member_ID)
-    response = make_response({"ok": True})
-    status = 200
+    if check_token is None:
+        return {"data": None}
+    else:
+        delete_Order(member_ID)
+        response = make_response({"ok": True})
+        status = 200
 
     return response

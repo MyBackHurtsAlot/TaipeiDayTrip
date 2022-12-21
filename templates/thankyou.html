@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} Booking Page {% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/thankyou.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="thankyouWrap"></div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script type="text/javascript" src="{{ url_for( 'static', filename = 'js/thankyou.js') }}"></script>
+{% endblock %}

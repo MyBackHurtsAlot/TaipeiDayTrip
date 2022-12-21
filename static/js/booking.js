@@ -15,11 +15,16 @@ const totalWrap = document.querySelector(".totalWrap")
 const hr = document.querySelectorAll("hr")
 const payConfirm = document.querySelector(".payConfirm")
 
+
 let attractionId = 0
+let purchasedImg
+let purchasedName = ""
+let purchasedDate = ""
+let purchasedTime = ""
+let purchasedAddress = ""
+let purchasedFee = 0
 let memberId = 0
 
-initialLoad = checkStatus()
-let isLoggedIn
 
 
 // ====================== Empty Order ===================================
@@ -35,7 +40,7 @@ const clearTree = () => {
 }
 const emptyOrder = () => {
     clearTree()
-    popUpMsg(`${memberName}，買個行程啦`, "QQ")
+    popUpMsg(`${memberName}，買個行程啦`, "QQ", "top")
     const cancel = document.querySelector(".cancel")
     cancel.onclick = () => {
         window.location.href = "/"
@@ -43,24 +48,22 @@ const emptyOrder = () => {
 }
 
 // ====================== Log In Check ===================================
-// window.onload = () => {
-initialLoad.then(isLoggedIn => {
-    if (isLoggedIn === null) {
+window.addEventListener("load", async () => {
+    const initialLoad = await checkStatus()
+    if (initialLoad === null) {
         window.location.href = "/"
 
     } else {
-        memberId = isLoggedIn["id"]
-        memberName = isLoggedIn["name"]
+        memberId = initialLoad["id"]
+        memberName = initialLoad["name"]
 
-        let reservationUserName = document.createTextNode(isLoggedIn.name)
+        let reservationUserName = document.createTextNode(initialLoad.name)
         hello_Username.appendChild(reservationUserName)
-        yourName_input.value = isLoggedIn.name
-        yourEmail_input.value = isLoggedIn.email
+        yourName_input.value = initialLoad.name
+        yourEmail_input.value = initialLoad.email
         getData()
     }
 })
-// }
-
 //====================== Delete Reservation ===================================
 iconDelete.onclick = async () => {
     let deleteItem = {
@@ -83,19 +86,21 @@ iconDelete.onclick = async () => {
 }
 
 // ============================== Get Data ================================
-fetchData = async (purchasedList, attractionList) => {
+fetchData = (purchasedList, attractionList) => {
     attractionId = attractionList.id
 
     // Split Images into array
     let imgSplit = attractionList.image.split(" ")
 
     // Get infomations
-    let purchasedImg = imgSplit[0]
-    let purchasedName = attractionList.name
-    let purchasedDate = purchasedList.date
-    let purchasedTime = purchasedList.time
-    let purchasedFee = purchasedList.price
-    let purchasedAddress = attractionList.address
+    purchasedImg = imgSplit[0]
+    purchasedName = attractionList.name
+    purchasedDate = purchasedList.date
+    purchasedTime = purchasedList.time
+    purchasedFee = purchasedList.price
+    purchasedAddress = attractionList.address
+
+
 
 
     const purchasedItems_ImgContainer = document.querySelector(".purchasedItems_ImgContainer")
@@ -138,6 +143,7 @@ fetchData = async (purchasedList, attractionList) => {
     const price = document.querySelector(".price")
     let totalPrice = document.createTextNode(`新台幣 ${purchasedFee} 元`)
     price.appendChild(totalPrice)
+    totalPrice = purchasedFee
 }
 
 getData = async () => {
@@ -148,30 +154,149 @@ getData = async () => {
     } else {
         bookingWrap.style.visibility = "visible"
         let purchasedList = data.data
-
         let attractionList = purchasedList.attraction
+
         fetchData(purchasedList, attractionList)
     }
 }
 
 
-// =============== input check ==================
-const regexPhone = /"^09[0-9]{8}$"/
-payConfirm.onclick = () => {
+// =============== Payment ==================
+
+// ====== SetUp ======
+let fields = {
+    number: {
+        // css selector
+        element: '#card-number',
+        placeholder: '**** **** **** ****'
+    },
+    expirationDate: {
+        // DOM object
+        element: document.getElementById('card-expiration-date'),
+        placeholder: 'MM / YY'
+    },
+    ccv: {
+        element: '#card-ccv',
+        placeholder: 'ccv'
+    }
+}
+
+
+TPDirect.card.setup({
+    fields: fields,
+    styles: {
+
+        // style focus state
+        ':focus': {
+            'color': 'black'
+        },
+        // style valid state
+        '.valid': {
+            'color': 'green'
+        },
+        // style invalid state
+        '.invalid': {
+            'color': 'red'
+        },
+        // Media queries
+        // Note that these apply to the iframe, not the root window.
+        '@media screen and (max-width: 400px)': {
+            'input': {
+                'color': 'orange'
+            }
+        }
+    }
+})
+
+
+// ====== onUpdate ======
+TPDirect.card.onUpdate(function (update) {
+    // update.canGetPrime === true
+    // --> you can call TPDirect.card.getPrime()
+    // if (update.canGetPrime) {
+    //     // Enable submit Button to get prime.
+    //     payConfirm.removeAttribute('disabled')
+    // } else {
+    //     // Disable submit Button to get prime.
+    //     payConfirm.setAttribute('disabled', true)
+    // }
+
+    // number 欄位是錯誤的
+    if ((update.status.number === 2) || (update.status.expiry === 2) || (update.status.ccv === 2)) {
+        popUpMsg("請不要亂填卡號，這非常不道德", "抱歉", "bottom")
+    }
+
+})
+
+// ====== Get Prime ======
+const onSubmit = (memberName, memberEmail, memberNumber) => {
+    TPDirect.card.getPrime((result) => {
+        if (result.status !== 0) {
+            popUpMsg("請不要亂填卡號，這非常不道德", "抱歉", "bottom")
+            return
+        }
+        const userPrime = result.card.prime
+
+        const billing = {
+            "prime": userPrime,
+            "order": {
+                "price": purchasedFee,
+                "trip": {
+                    "attraction": {
+                        "id": attractionId,
+                        "name": purchasedName,
+                        "address": purchasedAddress,
+                        "image": purchasedImg
+                    },
+                    "date": purchasedDate,
+                    "time": purchasedTime,
+                },
+                "contact": {
+                    "name": memberName,
+                    "email": memberEmail,
+                    "phone": memberNumber
+                }
+
+            }
+        }
+
+        // console.log(billing)
+        orders = async () => {
+            const response = await fetch("/api/order", {
+                method: "POST",
+                credentials: "include",
+                body: JSON.stringify(billing),
+                headers: new Headers({
+                    "Content-Type": "application/JSON"
+                })
+            })
+            const data = await response.json()
+            const pay_status = data.data.payment.status
+            if (pay_status === 0) {
+                window.location.href = `/thankyou?orderNumber=${data.data.number}`
+
+            } else {
+                popUpMsg("卡刷不過嗎", "QQ", "top")
+
+            }
+        }
+        orders()
+    })
+}
+
+payConfirm.addEventListener("click", () => {
     let memberName = yourName_input.value
     let memberEmail = yourEmail_input.value
     let memberNumber = yourNumber_input.value
-    if (memberName === "" || memberEmail === "" || memberNumber === "") {
-        popUpMsg("資料不能為空", "好的")
+    if (!memberName || !memberEmail || !memberNumber) {
+        popUpMsg("資料不能為空", "好的", "center")
     } else if (!regexName.test(memberName)) {
-        popUpMsg("請輸入正確姓名", "好的")
-
-
+        popUpMsg("請輸入正確姓名", "好的", "center")
     } else if (!regexEmail.test(memberEmail)) {
-        popUpMsg("請輸入正確Email", "好的")
-
+        popUpMsg("請輸入正確Email", "好的", "center")
     } else if (!regexPhone.test(memberNumber)) {
-        popUpMsg("請輸入正確手機號碼", "好的")
-
+        popUpMsg("請輸入正確手機號碼", "好的", "center")
+    } else {
+        onSubmit(memberName, memberEmail, memberNumber)
     }
-}
+})

@@ -15,6 +15,7 @@ import jwt
 from api.api_attractions import api_attractions
 from api.api_user import api_user
 from api.api_booking import api_booking
+from api.api_order import api_order
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
@@ -24,6 +25,7 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.register_blueprint(api_attractions)
 app.register_blueprint(api_user)
 app.register_blueprint(api_booking)
+app.register_blueprint(api_order)
 
 
 # Pages

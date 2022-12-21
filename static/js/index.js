@@ -158,6 +158,7 @@ initialLoad = async () => {
 
 // ========================= KeyWord ===========================
 keywordInput.addEventListener("change", () => {
+    isLoading = true
     page = 0
     let kInput = document.querySelector(".bannerSearchBar")
     keyword = kInput.value
@@ -175,12 +176,13 @@ keywordSearch = async (keyword) => {
         const response = await fetch(`/api/attractions?page=${page}&keyword=${keyword}`)
         const data = await response.json()
         indexData = data.data
-        // console.log(indexData)
 
         if (indexData.length === 0) {
-            alert("無此資料")
+            isLoading === false;
+            popUpMsg("請輸入正確景點名稱", "好的")
         } else {
             getData(indexData)
+
         }
         page = data.nextPage // page 4 can still shows up
         // console.log("nextpage = " + page)
@@ -188,6 +190,7 @@ keywordSearch = async (keyword) => {
 }
 
 search.addEventListener("click", () => {
+    isLoading = false
     page = 0
     let kInput = document.querySelector(".bannerSearchBar")
     keyword = kInput.value
@@ -196,7 +199,6 @@ search.addEventListener("click", () => {
     while (clear.firstChild) {
         clear.removeChild(clear.firstChild)
     }
-    // console.log(keyword)
 })
 
 // ========================= Scroll ===========================
@@ -231,8 +233,4 @@ let observer = new IntersectionObserver(callback, options)
 observer.observe(target)
 
 
-
-
-
-
-// export default { currentPage, callback, observer, }
+// =============== preload ==================
