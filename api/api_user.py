@@ -39,7 +39,7 @@ def user_register():
         if register["memberName"] == "" or register["memberEmail"] == "" or register["memberPassword"] == "":
             status = 400
             user_registered = error("請註冊")
-            print(type(register["memberName"]))
+            # print(type(register["memberName"]))
         else:
             cursor.execute(
                 "select email from membership where email = %s",
@@ -74,9 +74,7 @@ def user_register():
 # ======== Get member info ========
 @api_user.route("/api/user/auth")
 def get_Member_Info():
-    # 好像可以不用pool???
-    # pool = sites_pool.get_connection()
-    # cursor = pool.cursor(buffered=True, dictionary=True)
+
     check_token = request.cookies.get("token")
     # print(check_token)
     if check_token is None:

@@ -1,0 +1,32 @@
+.thankyouWrap {
+    min-height: calc(100vh - 54px - 104px);
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+}
+
+.contentWrap {
+    width: 360px;
+    height: 300px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 60px;
+    outline: 1px solid #E8E8E8;
+    border-radius: 5px;
+    box-shadow: -30px -20px #448899ad;
+}
+
+.contentWrap:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+.numberWrap {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ececec;
+}

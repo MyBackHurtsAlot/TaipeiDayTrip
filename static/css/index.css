@@ -10,6 +10,7 @@ html,
 body {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 16px;
+    color: #666666;
     /* height: 100%; */
 }
 
@@ -17,7 +18,9 @@ a {
     text-decoration: none;
 }
 
-
+.footerExtender {
+    display: flex;
+}
 
 /* header */
 /* navBar */
@@ -58,7 +61,11 @@ a {
     font-weight: 500;
     line-height: 13px;
     color: #666666;
+
 }
+
+
+
 
 /* ======= banner ======= */
 .heroContainer {
@@ -137,6 +144,7 @@ a {
 }
 
 .searchIcon:hover {
+    cursor: pointer;
     transform: scale(1.02);
 }
 
@@ -195,7 +203,7 @@ a {
     background-color: #fff;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 218px;
     transform: translate(-50%, -50%);
     border-radius: 6px;
     display: grid;
@@ -213,7 +221,7 @@ a {
     background-color: #fff;
     position: absolute;
     left: 50%;
-    top: 182px;
+    top: 233px;
     transform: translate(-50%, -50%);
     border-radius: 6px;
     display: grid;
@@ -331,6 +339,8 @@ a {
     text-align: center;
     gap: 15px;
     display: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
 }
 
 .cancel {
@@ -343,6 +353,54 @@ a {
     align-items: center;
     justify-content: center;
 }
+
+.cancelCenter {
+    position: absolute;
+    left: 50%;
+    top: 565px;
+    transform: translate(-50%, -50%);
+    font-weight: 300;
+    font-size: 18px;
+    color: #cd4f4f;
+    background-color: #ffffff;
+    width: 340px;
+    height: 150px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    text-align: center;
+    gap: 15px;
+    display: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.cancelBottom {
+    position: absolute;
+    left: 50%;
+    top: 885px;
+    transform: translate(-50%, -50%);
+    font-weight: 300;
+    font-size: 18px;
+    color: #cd4f4f;
+    background-color: #ffffff;
+    width: 340px;
+    height: 150px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    text-align: center;
+    gap: 15px;
+    display: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
 
 .cancel:hover {
     cursor: pointer;
@@ -533,5 +591,14 @@ footer {
         object-position: center center;
         border-radius: 5px 5px 0 0;
 
+    }
+
+
+    .cancelCenter {
+        top: 987px;
+    }
+
+    .cancelBottom {
+        top: 1184px;
     }
 }
