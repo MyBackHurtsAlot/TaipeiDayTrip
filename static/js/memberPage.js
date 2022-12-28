@@ -246,6 +246,7 @@ const changePassword = async (newPassword) => {
     const data = await response.json()
     if (data) {
         popUpMsg("改好了", "謝謝你", "center")
+        error.style.color = "#6274c1"
     }
 }
 

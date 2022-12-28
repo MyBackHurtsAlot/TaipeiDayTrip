@@ -25,8 +25,6 @@ let purchasedAddress = ""
 let purchasedFee = 0
 let memberId = 0
 
-
-
 // ====================== Empty Order ===================================
 const clearTree = () => {
     bookingWrap.style.minHeight = "calc(100vh - 54px - 104px)"
@@ -38,7 +36,7 @@ const clearTree = () => {
     paymentWrap.style.display = "none"
     totalWrap.style.display = "none"
 }
-const emptyOrder = () => {
+const emptyOrder = async () => {
     clearTree()
     popUpMsg(`${memberName}，買個行程啦`, "QQ", "top")
     const error = document.querySelector(".error")
@@ -56,8 +54,8 @@ window.addEventListener("load", async () => {
         window.location.href = "/"
 
     } else {
-        memberId = initialLoad["id"]
-        memberName = initialLoad["name"]
+        memberId = initialLoad.id
+        memberName = initialLoad.name
 
         let reservationUserName = document.createTextNode(initialLoad.name)
         hello_Username.appendChild(reservationUserName)

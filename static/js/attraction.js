@@ -271,7 +271,6 @@ const getReservation = async (reservation) => {
 
 reservation.onclick = () => {
     // Log In Check
-    // console.log(dateTime.value)
     memberInfo = checkStatus()
     memberInfo.then(isLoggedIn => {
         isLoggedIn = isLoggedIn

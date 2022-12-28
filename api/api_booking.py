@@ -144,6 +144,7 @@ def New_Itinerary():
     cursor = pool.cursor(buffered=True, dictionary=True)
 
     check_token = jwt.decode(check_token, secret, algorithms=['HS256'])
+    print(check_token)
 
     # print(new_Itinerary)
     try:
@@ -156,7 +157,8 @@ def New_Itinerary():
             }
             New_Reservation(new_Itinerary, check_token)
             status = 200
-    except Exception:
+    except Exception as e:
+        print(e)
         newReservation = error("伺服器內部錯誤")
         status = 500
     finally:
