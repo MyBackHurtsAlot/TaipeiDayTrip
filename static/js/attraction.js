@@ -152,8 +152,12 @@ getAttractionPage = async () => {
     slider.className = "slider"
     slider.setAttribute("src", imgSlider)
 
-    topLeft.appendChild(sliderWrap)
-    sliderWrap.appendChild(slider)
+    slider.onload = () => {
+        const lds_ring = document.querySelector(".lds_ring")
+        // lds_ring.style.display = "none"
+        topLeft.appendChild(sliderWrap)
+        sliderWrap.appendChild(slider)
+    }
 
     let dot = 0
 

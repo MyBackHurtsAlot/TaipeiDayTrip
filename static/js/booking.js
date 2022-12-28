@@ -41,6 +41,8 @@ const clearTree = () => {
 const emptyOrder = () => {
     clearTree()
     popUpMsg(`${memberName}，買個行程啦`, "QQ", "top")
+    const error = document.querySelector(".error")
+    error.style.top = "350px"
     const cancel = document.querySelector(".cancel")
     cancel.onclick = () => {
         window.location.href = "/"
@@ -211,17 +213,7 @@ TPDirect.card.setup({
 
 // ====== onUpdate ======
 TPDirect.card.onUpdate(function (update) {
-    // update.canGetPrime === true
-    // --> you can call TPDirect.card.getPrime()
-    // if (update.canGetPrime) {
-    //     // Enable submit Button to get prime.
-    //     payConfirm.removeAttribute('disabled')
-    // } else {
-    //     // Disable submit Button to get prime.
-    //     payConfirm.setAttribute('disabled', true)
-    // }
 
-    // number 欄位是錯誤的
     if ((update.status.number === 2) || (update.status.expiry === 2) || (update.status.ccv === 2)) {
         popUpMsg("請不要亂填卡號，這非常不道德", "抱歉", "bottom")
     }
