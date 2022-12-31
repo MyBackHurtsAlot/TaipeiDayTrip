@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %} Booking Page {% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/memberPage.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<div class="memberPageMain">
+    <div class="memberPageTop">
+        <!-- ==== img ==== -->
+        <div class="memberPageMain_left">
+            <div class="memberPageAvatorWrap_imgWrap">
+                <input type="file" class="fileUploader" data-target="file-uploader" accept="image/png, image/jpeg" />
+                <div class="memberPageAvator_img"></div>
+            </div>
+        </div>
+        <div class="memberPageMain_right">
+            <!-- ==== name ==== -->
+            <div class="memberPageAvotor_NameWrap">
+            </div>
+            <div class="background_circle"></div>
+            <!-- ==== Password ==== -->
+            <div class="memberPageAvator_PasswordWrap">
+                <div class="memberPageAvator_Password">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="historyWrap">
+        <div class="historyTitle">我們之間的回憶</div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script type="text/javascript" src="{{ url_for( 'static', filename = 'js/memberPage.js') }}"></script>
+{% endblock %}

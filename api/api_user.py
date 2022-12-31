@@ -27,6 +27,21 @@ def error(msg):
     }
 
 
+def get_user_info(user_id):
+    pool = sites_pool.get_connection()
+    cursor = pool.cursor(buffered=True, dictionary=True)
+    try:
+        cursor.execute(
+            "SELECT * FROM membership WHERE id = %s",
+            (user_id,)
+        )
+        member_info = cursor.fetchone()
+        return member_info
+    finally:
+        cursor.close()
+        pool.close()
+
+
 # ======== Register ========
 @api_user.route("/api/user", methods=["POST"])
 def user_register():
@@ -82,11 +97,13 @@ def get_Member_Info():
     else:
         check_token = jwt.decode(check_token, secret, algorithms=['HS256'])
         # print(check_token["id"])
+        user_id = check_token["id"]
+        info = get_user_info(user_id)
         response = make_response({
             "data": {
                 "id": check_token["id"],
-                "name": check_token["name"],
-                "email": check_token["email"]
+                "name": info["name"],
+                "email": info["email"]
             }
         })
         status = 200

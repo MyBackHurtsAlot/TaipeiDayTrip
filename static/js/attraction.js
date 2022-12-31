@@ -152,8 +152,12 @@ getAttractionPage = async () => {
     slider.className = "slider"
     slider.setAttribute("src", imgSlider)
 
-    topLeft.appendChild(sliderWrap)
-    sliderWrap.appendChild(slider)
+    slider.onload = () => {
+        const lds_ring = document.querySelector(".lds_ring")
+        // lds_ring.style.display = "none"
+        topLeft.appendChild(sliderWrap)
+        sliderWrap.appendChild(slider)
+    }
 
     let dot = 0
 
@@ -267,7 +271,6 @@ const getReservation = async (reservation) => {
 
 reservation.onclick = () => {
     // Log In Check
-    // console.log(dateTime.value)
     memberInfo = checkStatus()
     memberInfo.then(isLoggedIn => {
         isLoggedIn = isLoggedIn

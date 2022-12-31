@@ -16,6 +16,7 @@ from api.api_attractions import api_attractions
 from api.api_user import api_user
 from api.api_booking import api_booking
 from api.api_order import api_order
+from api.api_memberPage import api_memberPage
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
@@ -26,6 +27,7 @@ app.register_blueprint(api_attractions)
 app.register_blueprint(api_user)
 app.register_blueprint(api_booking)
 app.register_blueprint(api_order)
+app.register_blueprint(api_memberPage)
 
 
 # Pages
@@ -47,6 +49,11 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
     return render_template("thankyou.html")
+
+
+@app.route("/memberPage")
+def member():
+    return render_template("memberPage.html")
 
 
 app.run(host='0.0.0.0', port=3000, debug=True)

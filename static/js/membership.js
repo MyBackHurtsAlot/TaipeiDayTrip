@@ -14,8 +14,6 @@ navBarBtnLogin.onclick = () => {
     overlay.style.display = "block"
 }
 
-
-
 // Hides all block
 overlay.onclick = () => {
     signInContainer.style.display = "none"
@@ -62,7 +60,7 @@ const checkStatus = async () => {
     await fetchMemberInfo()
     // console.log(memberInfo)
     if (memberInfo !== null) {
-        navBarBtnLogout.style.display = "block"
+        navBarBtnMember.style.display = "block"
         navBarBtnLogin.style.display = "none"
     }
     return memberInfo
@@ -135,7 +133,6 @@ registerButton.onclick = () => {
     let memberPassword = registerPassword.value
     // console.log(memberName)
     if (!memberName || !memberEmail || !memberPassword) {
-
         popUpMsg("註冊一下啦", "好的", "top")
     } else if (!regexName.test(memberName)) {
 
@@ -181,7 +178,7 @@ registerButton.onclick = () => {
 
 // ================== signIn =================
 const signInButton = document.querySelector(".signInButton")
-const navBarBtnLogout = document.querySelector(".navBarBtnLogout")
+const navBarBtnMember = document.querySelector(".navBarBtnMember")
 
 signInButton.onclick = async () => {
     let signInEmail = document.querySelector(".signInEmail").value
@@ -215,16 +212,11 @@ signInButton.onclick = async () => {
     }
 }
 
-// ============= Sign out ===================
-navBarBtnLogout.onclick = async () => {
-    const response = await fetch(`/api/user/auth`, {
-        method: "DELETE",
-        credentials: "include"
-    })
-    const data = await response.json()
-    if (data.ok) {
-        window.location.reload()
-    }
+// ============= MemberPage ===================
+navBarBtnMember.onclick = async () => {
+
+    window.location.assign("/memberPage")
+
 }
 
 //============= Booking ===================
