@@ -11,7 +11,7 @@ Taipei Day Trip is a e-commerce website, you can click on the photos to view mor
 
   * [Test credit Card](README.md#and-the-test-credit-card-number)
   
-  * [Skills used](READ.me#skills-used)
+  * [Skills used](READ.md#skills-used)
 
   * [Features](README.md#features) 
       - [Infinite Scroll](#infinite-scroll)
