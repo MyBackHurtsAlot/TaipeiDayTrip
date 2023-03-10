@@ -21,14 +21,14 @@ Taipei Day Trip is a e-commerce website, you can click on the photos to view mor
       - [Member page](#member-page)
 
 ### Here is the test account
-
+| - | - |
 | ------- | ------- |
 | Account | test@gmail.com |
 | Password | 12341234 |
 
 
 ### And the test credit card number
-
+| - | - |
 | ------- | ------- |
 | Card Number | 4242424242424242 |
 | Valid Date | 01/24 |
