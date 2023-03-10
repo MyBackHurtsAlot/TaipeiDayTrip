@@ -22,7 +22,6 @@ Taipei Day Trip is a e-commerce website, you can click on the photos to view mor
 
 ### Here is the test account
 
-| - | - |
 | ------- | ------- |
 | Account | test@gmail.com |
 | Password | 12341234 |
@@ -30,7 +29,6 @@ Taipei Day Trip is a e-commerce website, you can click on the photos to view mor
 
 ### And the test credit card number
 
-| - | - |
 | ------- | ------- |
 | Card Number | 4242424242424242 |
 | Valid Date | 01/24 |
@@ -39,7 +37,7 @@ Taipei Day Trip is a e-commerce website, you can click on the photos to view mor
 
 ## Skills used
 
-| - | - |
+| Technique | Description |
 | ------- | ------- |
 | JavaScript | Pure JavaScript |
 | CSS | Layouts and RWD |
